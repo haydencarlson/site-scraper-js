@@ -50,6 +50,6 @@ async function requestUrl(url) {
     const { data } = await axios.get(url);
     return data;
   } catch(e) {
-    console.log(`Error requesting ${url} Response code: ${e.response.status}`);
+    console.log(`Error requesting ${url} Response code: ${e.code}`);
   }
 };
