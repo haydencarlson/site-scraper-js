@@ -2,7 +2,7 @@ const config = require('./config');
 const { Worker } = require('worker_threads');
 const fs = require('fs');
 
-let processedUrls = [];
+const processedUrls = [];
 let queuedUrls = [];
 let cyclesSinceLastQueue = 0;
 
@@ -14,19 +14,15 @@ worker.on('message', (foundUrls) => {
   processedUrls.push(...filteredUrls);
 });
 
-setInterval(async() => {
-  if (!queuedUrls.length) {
-    if (cyclesSinceLastQueue === 150) {
-      finished();
-    }
-    return cyclesSinceLastQueue += 1;
-  }
+setInterval(() => {
+  if (cyclesSinceLastQueue === 150) finished();
+  if (!queuedUrls.length) return cyclesSinceLastQueue += 1;
   const urlsForProcessing = [...queuedUrls];
   queuedUrls = [];
   processQueue(urlsForProcessing);
 }, 1000);
 
-async function start(url) {
+function start(url) {
   console.log(`Starting: ${url} pushed to queue`);
   processQueue([url]);
 }
@@ -37,13 +33,13 @@ function finished() {
   process.exit();
 }
 
-async function processQueue(urls) {
+function processQueue(urls) {
   worker.postMessage(urls);
 }
 
 function filterFoundUrls(foundUrls) {
-  // Filters out URLs that dont contain the baseUrl
-  let filteredUrls = foundUrls.filter(url => url.includes(config.baseUrl));
+  // Filters out URLs that dont start with the baseUrl
+  let filteredUrls = foundUrls.filter(url => url.startsWith(config.baseUrl));
 
   // Filter out URLs that were already processed
   filteredUrls = filteredUrls.filter(url => !processedUrls.includes(url));
