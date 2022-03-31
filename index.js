@@ -7,7 +7,7 @@ let queuedUrls = [];
 let cyclesSinceLastQueue = 0;
 
 const worker = new Worker('./worker.js');
-worker.on('error', () => {});
+worker.on('error', (e) => console.log(e));
 worker.on('message', (foundUrls) => {
   const filteredUrls = filterFoundUrls(foundUrls);
   queuedUrls.push(...filteredUrls);

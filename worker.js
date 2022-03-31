@@ -1,4 +1,4 @@
-const { parentPort, isMainThread } = require('worker_threads');
+const { parentPort } = require('worker_threads');
 const config = require('./config');
 const axios = require('axios');
 const jsdom = require('jsdom');
