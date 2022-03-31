@@ -9,7 +9,7 @@
   </a>
 </p>
 
-> A NodeJS program created to scrape URLs from dynamically rendered web apps without the need of spawning headless browsers. 
+> A NodeJS program created to scrape URLs from dynamically rendered web apps without the need of spawning headless browsers. It uses much less resources then headless browser alternatives and im currently using this to generate sitemaps for a production web app.
 
 ## Install
 

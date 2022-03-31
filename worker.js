@@ -38,7 +38,7 @@ async function processQueueUrl(url) {
 }
 
 function getUrlsFromDom(dom) {
-  const aTagList = dom.window.document.querySelectorAll("a");
+  const aTagList = dom.window.document.querySelectorAll('a');
   const aTagsArray = Array.from(aTagList);
   const urls = aTagsArray.map(a => a.href);
   parentPort.postMessage(urls);
