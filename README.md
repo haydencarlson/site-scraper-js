@@ -17,6 +17,14 @@
 npm install
 ```
 
+## Configuration
+
+```sh
+Move config.example.js to config.js
+Change baseUrl to the websites base url
+Change startUrl to the websites url you want to start scraping on
+```
+
 ## Usage
 
 ```sh
